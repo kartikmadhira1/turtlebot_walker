@@ -27,7 +27,8 @@
  *  @copyright MIT License
  *
  *  @brief  ENPM808X :Assignment to implement TurtleBot walker algorithm
- *
+ *  This file contains TurtleWalker class method declarations. This implements
+ *  a roomba like algorithm for turtlebot using callback to laserscan.
  */
 
 
@@ -37,6 +38,12 @@
 #include <ros/ros.h>
 #include "sensor_msgs/LaserScan.h"
 
+/**
+ *  @brief Class TurtleWalker
+ *
+ *  This class subscribes to laserscan msgs to get 2D depths
+ *  and check for collision
+ */
 class TurtleWalker {
  private:
     ros::NodeHandle handler;
@@ -44,11 +51,35 @@ class TurtleWalker {
     ros::Publisher pub;
     bool collisionCheck;
     geometry_msgs::Twist msgTwist;
-    void laserCallback(const sensor_msgs::LaserScan::ConstPtr& msg);
  public:
+    /**
+    *   @brief  Constructor for TurtleWalker class
+    *   @param  none
+    *   @return void
+    */
     TurtleWalker();
+    /**
+    *   @brief  Destructor for TWalker class
+    *   @param  none
+    *   @return void
+    */
     ~TurtleWalker();
+    /**
+    *   @brief  Callback for subscribing to laserScan data       
+    *   @param  LaserScan pointer message
+    *   @return void
+    */
+    void laserCallback(const sensor_msgs::LaserScan::ConstPtr& msg);
+    /**
+    *   @brief  Function for detection of obstacles
+    *   @param  none
+    *   @return boolean if obstacle is present or not
+    */
     bool checkObstacle();
+    /**
+    *   @brief Function that publishes data to move turtlebot
+    *   @return void
+    */
     void moveBot();
 
 };

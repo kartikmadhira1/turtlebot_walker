@@ -26,8 +26,8 @@
  *  @author  Kartik Madhira
  *  @copyright MIT License
  *
- *  @brief  ENPM808X :Assignment to implement TurtleBot walker algorithm
- *
+ *  This file contains TurtleWalker class method implementation. This implements
+ *  a roomba like algorithm for turtlebot using callback to laserscan 
  */
 
 
@@ -38,7 +38,8 @@ TurtleWalker::TurtleWalker() {
     collisionCheck = false;
     ROS_INFO_STREAM("Walker algorithm for Turtlebot initialized");
     // Publish odometry twist messages
-    pub = handler.advertise <geometry_msgs::Twist> ("/cmd_vel_mux/input/navi", 1000);
+    pub = handler.advertise<geometry_msgs::Twist>
+                            ("/cmd_vel_mux/input/navi", 1000);
     // Subscribe to the laserscans from 2D lidar on top of turtlebot
     sub = handler.subscribe("scan", 500, &TurtleWalker::laserCallback, this);
     //define the initial velocities
@@ -63,7 +64,8 @@ TurtleWalker::~TurtleWalker() {
 }
 
 
-void TurtleWalker::laserCallback(const sensor_msgs::LaserScan::ConstPtr& msgTwist) {
+void TurtleWalker::laserCallback(const sensor_msgs::LaserScan::ConstPtr& 
+                                msgTwist) {
     // Loop though the laserscan vector messages pointer
     for (int i = 0; i < msgTwist->ranges.size(); ++i) {
     // Threshold at 0.80cm to avoid collision
