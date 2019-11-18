@@ -30,9 +30,8 @@
  *  a roomba like algorithm for turtlebot using callback to laserscan 
  */
 
-
 #include <iostream>
-#include "../include/turtlebot_walker/turtle_walker.hpp" 
+#include "../include/turtlebot_walker/turtle_walker.hpp"
 
 TurtleWalker::TurtleWalker() {
     collisionCheck = false;
@@ -42,7 +41,7 @@ TurtleWalker::TurtleWalker() {
                             ("/cmd_vel_mux/input/navi", 1000);
     // Subscribe to the laserscans from 2D lidar on top of turtlebot
     sub = handler.subscribe("scan", 500, &TurtleWalker::laserCallback, this);
-    //define the initial velocities
+    // Define the initial velocities
     msgTwist.linear.x = 0.0;
     msgTwist.linear.y = 0.0;
     msgTwist.linear.z = 0.0;
@@ -53,7 +52,7 @@ TurtleWalker::TurtleWalker() {
 }
 
 TurtleWalker::~TurtleWalker() {
-   // Completely stop turtlebot
+    // Completely stop turtlebot
     msgTwist.linear.x = 0.0;
     msgTwist.linear.y = 0.0;
     msgTwist.linear.z = 0.0;
@@ -63,8 +62,7 @@ TurtleWalker::~TurtleWalker() {
     pub.publish(msgTwist);
 }
 
-
-void TurtleWalker::laserCallback(const sensor_msgs::LaserScan::ConstPtr& 
+void TurtleWalker::laserCallback(const sensor_msgs::LaserScan::ConstPtr&
                                 msgTwist) {
     // Loop though the laserscan vector messages pointer
     for (int i = 0; i < msgTwist->ranges.size(); ++i) {
@@ -85,7 +83,7 @@ bool TurtleWalker::checkObstacle() {
 void TurtleWalker::moveBot() {
     ros::Rate loop_rate(10);
     while (ros::ok()) {
-        if(checkObstacle()) {
+        if (checkObstacle()) {
             ROS_WARN_STREAM("Obstacle in line!, Moving.");
             // If obstacle is detected turn around
             msgTwist.linear.x = 0.0;

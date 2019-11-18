@@ -51,6 +51,7 @@ class TurtleWalker {
     ros::Publisher pub;
     bool collisionCheck;
     geometry_msgs::Twist msgTwist;
+
  public:
     /**
     *   @brief  Constructor for TurtleWalker class
@@ -81,7 +82,6 @@ class TurtleWalker {
     *   @return void
     */
     void moveBot();
-
 };
 
 

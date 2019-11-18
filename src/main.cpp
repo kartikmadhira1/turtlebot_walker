@@ -31,7 +31,7 @@
  */
 
 
-#include "../include/turtlebot_walker/turtle_walker.hpp" 
+#include "../include/turtlebot_walker/turtle_walker.hpp"
 
 int main(int argc, char* argv[]) {
   // Initialize the ros node and TurtleWalker class
