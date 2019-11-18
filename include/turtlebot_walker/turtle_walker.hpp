@@ -46,7 +46,7 @@ class TurtleWalker {
     geometry_msgs::Twist msgTwist;
     void laserCallback(const sensor_msgs::LaserScan::ConstPtr& msg);
  public:
-    TurtleWalker(ros::NodeHandle &n);
+    TurtleWalker();
     ~TurtleWalker();
     bool checkObstacle();
     void moveBot();

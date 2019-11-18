@@ -34,13 +34,13 @@
 #include <iostream>
 #include "../include/turtlebot_walker/turtle_walker.hpp" 
 
-TurtleWalker::TurtleWalker(ros::NodeHandle &n) {
+TurtleWalker::TurtleWalker() {
     collisionCheck = false;
     ROS_INFO_STREAM("Walker algorithm for Turtlebot initialized");
     // Publish odometry twist messages
-    pub = n.advertise <geometry_msgs::Twist> ("/cmd_vel_mux/input/navi", 1000);
+    pub = handler.advertise <geometry_msgs::Twist> ("/cmd_vel_mux/input/navi", 1000);
     // Subscribe to the laserscans from 2D lidar on top of turtlebot
-    sub = n.subscribe("scan", 500, &TurtleWalker::laserCallback, this);
+    sub = handler.subscribe("scan", 500, &TurtleWalker::laserCallback, this);
     //define the initial velocities
     msgTwist.linear.x = 0.0;
     msgTwist.linear.y = 0.0;
